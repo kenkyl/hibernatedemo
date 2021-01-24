@@ -1,7 +1,7 @@
 package com.kyle.hibernatedemo;
 
-import com.kyle.hibernatedemo.models.Book;
-import com.kyle.hibernatedemo.services.BookService;
+import com.kyle.hibernatedemo.models.InitObject;
+import com.kyle.hibernatedemo.services.InitObjectService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,13 +13,13 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BookServiceUnitTest {
+public class InitObjectServiceUnitTest {
     @Autowired
-    private BookService bookService;
+    private InitObjectService initObjectService;
 
     @Test
     public void whenApplicationStarts_thenHibernateCreatesInitialRecords() {
-        List<Book> books = bookService.list();
-        Assert.assertEquals(books.size(), 3);
+        List<InitObject> initObjects = initObjectService.list();
+        Assert.assertEquals(3, initObjects.size());
     }
 }
