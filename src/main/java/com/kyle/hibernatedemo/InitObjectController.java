@@ -26,8 +26,8 @@ public class InitObjectController {
         List<InitObject> res = initObjectService.list();
         Long end = System.nanoTime();
         Long time = end - start;
-
-        return String.format("time: %s\nobjects: %s", time.toString(), res.toString());
+        return String.format("time: %s\nobjects: %s", time.toString(), "fetched");
+        //return String.format("time: %s\nobjects: %s", time.toString(), res.toString());
     }
 
     @RequestMapping("/init/{id}")

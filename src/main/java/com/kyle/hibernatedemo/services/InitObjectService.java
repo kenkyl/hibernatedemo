@@ -20,8 +20,10 @@ public class InitObjectService {
     public InitObject findOne(long id) {
         Optional<InitObject> initObjectOptional = initObjectRepository.findById(id);
         if (initObjectOptional.isPresent()) {
+            System.out.println("****GOT IT");
             return initObjectOptional.get();
         } else {
+            System.out.println("****NOT****GOT IT");
             return null;
         }
     }

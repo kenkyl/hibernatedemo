@@ -55,7 +55,7 @@ def main():
         item_value2 = ''.join(random.choices(string.ascii_uppercase + string.digits, k = ITEM_LENGTH))
 
         items_list.append((str(i), item_value1, item_value2))
-        r.hset(f'items:{i}', mapping={'value1': item_value1, 'value2': item_value2})
+        #r.hset(f'items:{i}', mapping={'value1': item_value1, 'value2': item_value2})
     with connection.cursor() as cursor:
         cursor.executemany(insert_query, items_list)
         connection.commit()
