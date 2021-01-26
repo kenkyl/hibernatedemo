@@ -1,7 +1,6 @@
 singleServerConfig:
-  #address: "redis://127.0.0.1:6379"
-  address: "redis://redis-18015.kyle-cluster.demo.redislabs.com:18015"
-  password: "password"
+  address: "redis://${REDIS_HOST}:${REDIS_PORT}"
+  #password: "${REDIS_PASS}"
   subscriptionsPerConnection: 5
   subscriptionConnectionMinimumIdleSize: 1
   subscriptionConnectionPoolSize: 25
