@@ -3,6 +3,7 @@ package com.kyle.hibernatedemo;
 import com.kyle.hibernatedemo.models.InitObject;
 import com.kyle.hibernatedemo.services.InitObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class InitObjectController {
     }
 
     @RequestMapping("/init/{id}")
-    public String getOne(String id) {
+    public String getOne(@PathVariable String id) {
         Long start = System.nanoTime();
         InitObject res = initObjectService.findOne(valueOf(id));
         Long end = System.nanoTime();

@@ -31,7 +31,8 @@ def main():
         password=MYSQL_PASSWORD
     )
     print(connection)
-    # create table (if it doesn't exist) 
+
+    # create table (if it doesn't exist)
     create_table_query = f"""
     CREATE TABLE IF NOT EXISTS `{MYSQL_TABLE}` (
         id BIGINT UNIQUE NOT NULL,

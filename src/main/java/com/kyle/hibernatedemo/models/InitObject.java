@@ -19,6 +19,7 @@ public class InitObject {
     private String value2;
     private String value3;
     private String value4;
+    private String value5;
 
     public Long getId() {
         return id;
@@ -26,6 +27,11 @@ public class InitObject {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s--> value1: %s, value2: %s, value3: %s, value4: %s", this.id, this.value1, this.value2, this.value3, this.value4, this.value5);
     }
 
     public String getValue1() {
@@ -45,18 +51,26 @@ public class InitObject {
     }
 
     public String getValue3() {
-        return value1;
+        return value3;
     }
 
-    public void setValue3(String value1) {
-        this.value1 = value1;
+    public void setValue3(String value3) {
+        this.value3 = value3;
     }
 
     public String getValue4() {
-        return value2;
+        return value4;
     }
 
-    public void setValue4(String value2) {
-        this.value2 = value2;
+    public void setValue4(String value4) {
+        this.value4 = value4;
+    }
+
+    public String getValue5() {
+        return value5;
+    }
+
+    public void setValue5(String value5) {
+        this.value5 = value5;
     }
 }

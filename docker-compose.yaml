@@ -1,6 +1,19 @@
 version: '3.9'
 
 services:
+  demo-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-dev
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+
   mysql-dev:
     image: mysql:latest
     environment:
