@@ -17,6 +17,8 @@ public class InitObject {
     private Long id;
     private String value1;
     private String value2;
+    private String value3;
+    private String value4;
 
     public Long getId() {
         return id;
@@ -39,6 +41,22 @@ public class InitObject {
     }
 
     public void setValue2(String value2) {
+        this.value2 = value2;
+    }
+
+    public String getValue3() {
+        return value1;
+    }
+
+    public void setValue3(String value1) {
+        this.value1 = value1;
+    }
+
+    public String getValue4() {
+        return value2;
+    }
+
+    public void setValue4(String value2) {
         this.value2 = value2;
     }
 }
