@@ -1,6 +1,13 @@
 version: '3.9'
 
 services:
+#  insert-data:
+#    build:
+#      context: ./setup
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - mysql-dev
+
   demo-app:
     build:
       context: ./
@@ -10,8 +17,9 @@ services:
       - "8080:8080"
     depends_on:
       - mysql-dev
+      - redis-dev
     environment:
-      REDIS_HOST: localhost
+      REDIS_HOST: redis-dev
       REDIS_PORT: 6379
       MYSQL_HOST: mysql-dev
       MYSQL_PORT: 3306
