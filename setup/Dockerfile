@@ -4,5 +4,5 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["insert_data.py"]
 ENTRYPOINT ["python3"]
+CMD ["insert_data.py"]

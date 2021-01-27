@@ -1,12 +1,22 @@
 version: '3.9'
 
 services:
-#  insert-data:
-#    build:
-#      context: ./setup
-#      dockerfile: Dockerfile
-#    depends_on:
-#      - mysql-dev
+  insert-data:
+    build:
+      context: ./setup
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-dev
+    volumes:
+      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
+    # NOTE - also need to update $MYSQL_HOST, $MYSQL_PORT, and $SCRIPT_NAME in .env
+    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","--","python3","${SCRIPT_NAME}"]
+    environment:
+      MYSQL_HOST: mysql-dev
+      MYSQL_PORT: 3306
+      MYSQL_DB: testdb
+      MYSQL_USER: root
+      MYSQL_PASS: password
 
   demo-app:
     build:
@@ -18,11 +28,14 @@ services:
     depends_on:
       - mysql-dev
       - redis-dev
+    volumes:
+      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     environment:
       REDIS_HOST: redis-dev
       REDIS_PORT: 6379
       MYSQL_HOST: mysql-dev
       MYSQL_PORT: 3306
+    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","--","java","-Dserver.port=8080","-jar","/app/hibernatedemo.jar"]
 
   mysql-dev:
     image: mysql:latest
@@ -31,6 +44,7 @@ services:
       MYSQL_DATABASE: testdb
     ports:
       - "3306:3306"
+    command: ["mysqld", "--default-authentication-plugin=mysql_native_password"]
 
   redis-dev:
     image: redis:latest
