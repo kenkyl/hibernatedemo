@@ -16,7 +16,7 @@ MYSQL_USER= os.environ.get('MYSQL_USER') if (os.environ.get('MYSQL_USER') is not
 MYSQL_PASS= os.environ.get('MYSQL_PASS') if (os.environ.get('MYSQL_PASS') is not None) else 'password'
 MYSQL_TABLE= 'init_object'
 
-NUM_ITEMS = 2000
+NUM_ITEMS = int(os.environ.get("NUM_ITEMS")) if (os.environ.get('NUM_ITEMS') is not None) else 2000
 ITEM_LENGTH = 250
 
 def main():
@@ -71,6 +71,7 @@ def main():
         VALUES (%s, %s, %s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE id=id
     """
+    print(f'inserting {NUM_ITEMS} items into MySQL')
     for i in range(NUM_ITEMS):
         item_value1 = ''.join(random.choices(string.ascii_uppercase + string.digits, k = ITEM_LENGTH))
         item_value2 = ''.join(random.choices(string.ascii_uppercase + string.digits, k = ITEM_LENGTH))

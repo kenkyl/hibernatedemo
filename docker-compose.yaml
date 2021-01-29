@@ -10,13 +10,14 @@ services:
     volumes:
       - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     # NOTE - also need to update $MYSQL_HOST, $MYSQL_PORT, and $SCRIPT_NAME in .env
-    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","--","python3","${SCRIPT_NAME}"]
+    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","-t","30","--","python3","${SCRIPT_NAME}"]
     environment:
       MYSQL_HOST: mysql-dev
       MYSQL_PORT: 3306
       MYSQL_DB: testdb
       MYSQL_USER: root
       MYSQL_PASS: password
+      NUM_ITEMS: 100000
 
   demo-app:
     build:
@@ -36,7 +37,7 @@ services:
       MYSQL_HOST: mysql-dev
       MYSQL_PORT: 3306
       LOAD_ON_STARTUP: "true"
-    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","--","java","-Dserver.port=8080","-jar","/app/hibernatedemo.jar"]
+    entrypoint: ["wait-for-it.sh","${MYSQL_HOST}:${MYSQL_PORT}","-t","30","--","java","-Dserver.port=8080","-jar","/app/hibernatedemo.jar"]
 
   mysql-dev:
     image: mysql:latest
