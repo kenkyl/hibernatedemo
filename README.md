@@ -19,6 +19,9 @@ The Spring Boot app exposes 2 endpoints for fetching data:
    - `curl localhost:8080/init` to load all data (first attempt will load from backend database)
 3. Repeat data load to load data from cache 
 
+### Configuration
+- To prevent data load on start-up, change the _demo_app_ environment variable `LOAD_ON_STARTUP` to `"false"` in _docker-compose.yaml_
+
 ### To stop
 1. `Crtl+C`
 2. `docker-compose down`
