@@ -30,10 +30,10 @@ public class InitComponent {
             if (initFlag == true) {
                 // pull data from MySQL and load Hibernate L2 cache (Redis)
                 Long start = System.nanoTime();
-                initObjectService.list();
+                List<InitObject> res = initObjectService.list();
                 Long end = System.nanoTime();
                 Long time = end - start;
-                LOG.info(String.format("***Initialize data load complete. Time estimate: %s***", time.toString()));
+                LOG.info(String.format("***Initialize data load complete. Time estimate: %s, objects loaded: %d***", time.toString(), res.size()));
             }
         } catch (NullPointerException ex) {
             LOG.info("***$LOAD_ON_STARTUP not found***");

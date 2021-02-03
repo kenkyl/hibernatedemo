@@ -14,6 +14,14 @@ The Spring Boot app exposes 2 endpoints for fetching data:
 - Docker
 
 ## Running the Demo
+### Configuration
+- To prevent data load on start-up, change the *demo-app* env var `LOAD_ON_STARTUP` to `"false"` in *.env*
+- To edit the number of documents loaded into the database, change the *load-data* env var `NUM_ITEMS` to the desired count in *.env*
+
+####Estimating Dataset Size
+Adjust the number of documents loaded into the database with the `NUM_ITEMS` env var for the *load-data* service.
+TODO - add table
+
 ### Running all demo containers
 1. Start the containers with: `docker-compose up`
 2. Load data by sending an HTTP request, e.g.
@@ -21,16 +29,19 @@ The Spring Boot app exposes 2 endpoints for fetching data:
    - **Note:** the application will attempt to fetch data upon startup, but the first attempt will reach an empty database if the _insert_data_ script is not complete
 3. Repeat data load to load data from cache 
 
+### To stop
+1. `Crtl+C`
+2. Stop any additional running containers attached to the network (e.g. `docker stop hibernatedemo_demo-app_2`)
+3. `docker-compose down`
+
 ### Running another instance of the demo Spring Boot app
 Once all containers are up and running from *docker-compose*, you can startup more instances of the Spring Boot application.
 Each instance will attempt to immediately load data on startup if the `LOAD_DATA_ON_STARTUP` enviornment variable is set to "true".
 To run:
-1. `docker run --network hibernate-demo-network --env-file .env -p <host-port>:8080 hibernatedemo_demo-app`
+1. `docker run --network hibernate-demo-network --env-file .env -p <host-port>:8080 --name <container-name> hibernatedemo_demo-app`
+    - e.g. `docker run --network hibernate-demo-network --env-file .env -p 8081:8080 --name hibernatedemo_demo-app_2 hibernatedemo_demo-app`
 
-### Configuration
-- To prevent data load on start-up, change the _demo_app_ environment variable `LOAD_ON_STARTUP` to `"false"` in _docker-compose.yaml_
-- To edit the number of documents loaded into the database, change the 
 
-### To stop
-1. `Crtl+C`
-2. `docker-compose down`
+   
+
+

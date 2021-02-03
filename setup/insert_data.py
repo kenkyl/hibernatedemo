@@ -48,7 +48,7 @@ def main():
 
     # insert data 
     num_runs = 1
-    items_per_run = BATCH_THRESHOLD
+    items_per_run = NUM_ITEMS
     count = 0
     odd_run = False
     insert_query = f"""
@@ -60,6 +60,7 @@ def main():
 
     # check to see if batching is needed for insert 
     if (NUM_ITEMS > BATCH_THRESHOLD):
+        items_per_run = BATCH_THRESHOLD
         num_runs = (NUM_ITEMS // BATCH_THRESHOLD)
         if ((NUM_ITEMS % BATCH_THRESHOLD) > 0):
             num_runs += 1 
