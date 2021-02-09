@@ -18,7 +18,23 @@ The Spring Boot app exposes 2 endpoints for fetching data:
 - To prevent data load on start-up, change the *demo-app* env var `LOAD_ON_STARTUP` to `"false"` in *.env*
 - To edit the number of documents loaded into the database, change the *load-data* env var `NUM_ITEMS` to the desired count in *.env*
 
-####Estimating Dataset Size
+**Environment Variables**
+Note that all environment variables have default values that can be found in `resources/application.properties` and `resources/redisson.yaml` for demo-app and in `setup/insert_data.py` for insert-data
+
+- APP_HOST_PORT      --> the port for demo-app that is exposed from the host machine (demo-app)
+- APP_CONTAINER_PORT --> the port for the demo-app that is exposed from the container (demo-app) (this should **not** change)
+- SCRIPT_NAME        --> the name of the data loading script (only needed for docker-compose)
+- NUM_ITEMS          --> the number of items/documents to for insert-data script to load into MySQL (insert-data)
+- MYSQL_HOST         --> the MySQL host string or IP (demo-app and insert-data)
+- MYSQL_PORT         --> the MySQL port (demo-app and insert-data)
+- MYSQL_DB           --> the MySQL database name (demo-app and insert-data)
+- MYSQL_USER         --> the MySQL username (demo-app and insert-data)
+- MYSQL_PASS         --> the MySQL password (demo-app and insert-data)
+- REDIS_HOST         --> the Redis host string or IP (demo-app)
+- REDIS_PORT         --> the Redis port (demo-app and insert-data)
+- REDIS_PASS         --> the Redis password (demo-app and insert-data) (note: if set, the field must be uncommented in `resources/redisson.yaml`!)
+
+**Estimating Dataset Size**
 Adjust the number of documents loaded into the database with the `NUM_ITEMS` env var for the *load-data* service.
 TODO - add table
 
